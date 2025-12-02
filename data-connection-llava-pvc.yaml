@@ -12,5 +12,5 @@ metadata:
     opendatahub.io/dashboard: "true"
 type: Opaque
 stringData:
-  URI: pvc://pvc-multimodal
+  URI: pvc://pvc-llava-multimodal
 
