@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pvc-multimodal
-  namespace: multimodal-demo
+  name: pvc-encoder
+  namespace: demo
 spec:
   accessModes:
     - ReadWriteOnce
@@ -10,4 +10,4 @@ spec:
     requests:
       storage: 50Gi
   storageClassName: gp3-csi
-
+  volumeMode: Filesystem
