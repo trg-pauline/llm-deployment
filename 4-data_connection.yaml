@@ -6,10 +6,10 @@ metadata:
   labels:
     example.io/dashboard: 'true'
   annotations:
-    example.io/connection-type-protocol: uri
-    example.io/connection-type-ref: uri-v1
-    description: ''
-    display-name: pvc-encoder
+    opendatahub.io/connection-type-protocol: uri
+    opendatahub.io/connection-type-ref: uri-v1
+    openshift.io/description: ""
+    openshift.io/display-name: pvc-encoder
 type: Opaque
-data:
-  URI: cHZjOi8vcHZjLWVuY29kZXI=
+stringData:
+  URI: pvc://pvc-encoder
