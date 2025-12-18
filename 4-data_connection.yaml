@@ -1,0 +1,15 @@
+kind: Secret
+apiVersion: v1
+metadata:
+  name: pvc-encoder
+  namespace: my-namespace
+  labels:
+    example.io/dashboard: 'true'
+  annotations:
+    example.io/connection-type-protocol: uri
+    example.io/connection-type-ref: uri-v1
+    description: ''
+    display-name: pvc-encoder
+type: Opaque
+data:
+  URI: cHZjOi8vcHZjLWVuY29kZXI=
