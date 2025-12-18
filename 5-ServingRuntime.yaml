@@ -1,0 +1,44 @@
+apiVersion: serving.kserve.io/v1alpha1
+kind: ServingRuntime
+metadata:
+  name: model-serving-runtime
+  namespace: demo
+spec:
+  containers:
+    - name: kserve-container
+      image: 'nvcr.io/generic/vllm-cuda:latest'
+      args:
+        - '--port=8080'
+        - '--model=/mnt/models/model'
+        - '--served-model-name={{.Name}}'
+        - '--tokenizer-mode=generic'
+        - '--config-format=generic'
+        - '--load-format=generic'
+        - '--kv-cache-dtype=fp8'
+        - '--tensor-parallel-size=2'
+        - '--gpu-memory-utilization=0.90'
+      env:
+        - name: HF_HOME
+          value: /tmp/hf_home
+        - name: HF_HUB_OFFLINE
+          value: '0'
+        - name: HF_HUB_CACHE
+          value: /tmp/.cache
+        - name: VLLM_CACHE_ROOT
+          value: /tmp/.cache/vllm
+        - name: VLLM_CACHE_DIR
+          value: /tmp/.cache/vllm
+        - name: TVM_HOME
+          value: /tmp/.cache/tvm
+        - name: FLASHINFER_WORKSPACE_DIR
+          value: /tmp/.cache/flashinfer
+      volumeMounts:
+        - mountPath: /home/vllm/.cache
+          name: vllm-cache
+  multiModel: false
+  supportedModelFormats:
+    - autoSelect: true
+      name: vLLM
+  volumes:
+    - emptyDir: {}
+      name: vllm-cache
